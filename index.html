@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#761c3c">
+  <meta name="description" content="Um convite especial do Mauricio. Qual vai ser o nosso plano?">
+  <title>Um convite pra você ♡</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23761c3c'/%3E%3Ctext x='32' y='47' text-anchor='middle' font-size='49' fill='%23ffdae7'%3E%E2%99%A5%3C/text%3E%3C/svg%3E">
+  <style>
+    :root{color-scheme:light;--wine:#761c3c;--pink:#fce4ec;--ink:#4e1730}
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100svh;background:var(--pink);color:var(--ink);font-family:Arial,Helvetica,sans-serif;display:grid;place-items:center;padding:32px 20px;background-image:radial-gradient(#761c3c13 1px,transparent 1px);background-size:20px 20px}
+    main{width:min(100%,530px);padding:40px 38px 30px;background:#fffafa;border:1px solid #eac2d0;border-radius:8px;box-shadow:9px 11px 0 #edc5d3;position:relative}
+    .heart{display:block;text-align:center;color:var(--wine);font-family:Georgia,serif;font-size:3.4rem;line-height:1;margin-bottom:18px}
+    h1{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:clamp(2.6rem,9vw,3.65rem);line-height:1.04;letter-spacing:-.045em;text-align:center;margin:0 0 18px}
+    h1 em{font-weight:400;color:#a82b58}
+    .intro{text-align:center;font-size:1rem;line-height:1.6;color:#795565;margin:0 0 28px}
+    .choices{display:grid;gap:10px}
+    button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+    .choice{width:100%;display:flex;align-items:center;gap:13px;text-align:left;padding:16px 18px;min-height:57px;color:var(--ink);background:#fff;border:1px solid #ead5dd;border-radius:12px;transition:background .18s,transform .18s,opacity .18s}
+    .choice:hover{background:#fff0f5;transform:translateY(-2px)}
+    .choice:focus-visible{outline:3px solid #b84070;outline-offset:4px}
+    .icon{font-size:1.2rem;flex:0 0 25px;text-align:center}
+    .choice.yes{background:var(--wine);color:#fff;border-color:var(--wine);margin-top:5px;font-weight:700}
+    .choice.yes:hover{background:#91264d}
+    .choice.disappearing{opacity:0;transform:scale(.9);pointer-events:none}
+    .note{min-height:26px;text-align:center;margin:15px 0 0;color:#96244d;font-weight:700;line-height:1.6}
+    footer{text-align:center;border-top:1px dashed #e2bccb;padding-top:20px;margin-top:17px;color:#8a6473;font-size:.875rem}
+    footer span{font-family:Georgia,serif;font-style:italic;color:var(--wine);font-size:1.2rem}
+    [hidden]{display:none!important}
+    .success{text-align:center;padding:35px 0 45px}
+    .success h2{font-family:Georgia,serif;font-size:clamp(2.3rem,8vw,3.2rem);font-weight:400;line-height:1.1;margin:24px 0 20px;outline:none}
+    .success p{font-size:1.1rem;line-height:1.7;color:#795565;margin:0}
+    .couple-photo{display:block;width:min(100%,220px);height:275px;object-fit:cover;object-position:center 30%;margin:20px auto;border:4px solid #fff;border-radius:18px;box-shadow:0 8px 22px #761c3c24;animation:photo-reveal .8s cubic-bezier(.2,.75,.25,1) both}
+    @keyframes photo-reveal{from{opacity:0;transform:translateY(18px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}
+    .schedule{display:grid;gap:14px;margin:24px 0 0;text-align:left}
+    .schedule label{display:grid;gap:7px;font-weight:700;font-size:.95rem}
+    .schedule input{width:100%;min-height:50px;padding:11px 13px;border:1px solid #d8b6c3;border-radius:10px;background:#fff;color:var(--ink);font:inherit}
+    .schedule input:focus-visible{outline:3px solid #b84070;outline-offset:2px}
+    .send{width:100%;min-height:52px;margin-top:4px;padding:13px 18px;border:0;border-radius:12px;background:#168c55;color:#fff;font-weight:700;font-size:1rem}
+    .send:hover{background:#117544}
+    .send:focus-visible{outline:3px solid #b84070;outline-offset:4px}
+    .seal{display:inline-grid;place-items:center;width:90px;height:90px;border:1px solid #e2adc1;border-radius:50%;background:#fce4ec;color:#96244d;font-size:2.8rem}
+    .confetti{position:fixed;top:-30px;left:var(--x);width:8px;height:15px;background:var(--color);pointer-events:none;animation:fall 2.8s ease-in var(--delay) forwards;z-index:2}
+    @keyframes fall{to{transform:translateY(110vh) rotate(600deg);opacity:0}}
+    @media(max-width:400px){body{padding:22px 16px}main{padding:30px 23px 24px}.choice{padding:15px 12px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.couple-photo{opacity:1;transform:none}.confetti{display:none}}
+  </style>
+</head>
+<body>
+  <main>
+    <section id="invitation" aria-labelledby="title">
+      <span class="heart" aria-hidden="true">♡</span>
+      <h1>Quais são seus planos para o <em>fim de semana?</em></h1>
+      <p class="intro" id="title">Tenho algumas ideias…<br>mas uma delas é a minha favorita.</p>
+      <div class="choices">
+        <button class="choice" data-choice="serie"><span class="icon" aria-hidden="true">📺</span>Ver série</button>
+        <button class="choice" data-choice="casa"><span class="icon" aria-hidden="true">🏠</span>Ficar em casa</button>
+        <button class="choice" data-choice="sanduiche"><span class="icon" aria-hidden="true">🥪</span>Sanduíche com as amigas</button>
+        <button class="choice" data-choice="clash"><span class="icon" aria-hidden="true">👑</span>Jogar Clash Royale</button>
+        <button class="choice yes" data-choice="mauricio"><span class="icon" aria-hidden="true">♡</span>Sair com o Mauricio</button>
+      </div>
+      <p class="note" id="message" role="status" aria-live="polite"></p>
+    </section>
+    <section class="success" id="success" aria-labelledby="success-title" hidden>
+      <span class="seal" aria-hidden="true">♥</span>
+      <h2 id="success-title" tabindex="-1">Então é um encontro!</h2>
+      <img class="couple-photo" src="assets/foto-encontro.jpg" alt="Foto do casal juntos" width="220" height="275">
+      <p>Você, eu e um tempinho juntos. ♡</p>
+      <form class="schedule" id="schedule-form">
+        <label for="date">📅 Escolha o dia
+          <input id="date" name="date" type="date" required>
+        </label>
+        <label for="time">🕒 Escolha o horário
+          <input id="time" name="time" type="time" required>
+        </label>
+        <button class="send" type="submit">Enviar pelo WhatsApp</button>
+      </form>
+    </section>
+      <footer id="signature" hidden>Com carinho <span>— Mauricio</span></footer>
+  </main>
+  <script>
+    const invitation = document.getElementById('invitation');
+    const success = document.getElementById('success');
+    const message = document.getElementById('message');
+    const scheduleForm = document.getElementById('schedule-form');
+    const dateInput = document.getElementById('date');
+    const timeInput = document.getElementById('time');
+    const today = new Date();
+    dateInput.min = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+    scheduleForm.addEventListener('submit', event => {
+      event.preventDefault();
+      if (!scheduleForm.reportValidity()) return;
+      const [year, month, day] = dateInput.value.split('-');
+      const date = `${day}/${month}/${year.slice(-2)}`;
+      const time = timeInput.value;
+      const text = `Oi 😳👀 minha agenda estará livre dia ${date} ás ${time} horas`;
+      window.location.href = `https://wa.me/5531996486319?text=${encodeURIComponent(text)}`;
+    });
+    let accepted = false;
+    function choose(value) {
+      const button = [...document.querySelectorAll('[data-choice]')].find(item => item.dataset.choice === value);
+      if (!button) throw new Error('Opção inválida.');
+      if (accepted || button.disabled) return {accepted, message: message.textContent};
+      if (value === 'mauricio') {
+          accepted = true;
+          invitation.hidden = true;
+          success.hidden = false;
+          document.getElementById('signature').hidden = false;
+        document.getElementById('success-title').focus();
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          for (let i = 0; i < 36; i++) {
+            const piece = document.createElement('i');
+            piece.className = 'confetti';
+            piece.setAttribute('aria-hidden', 'true');
+            piece.style.setProperty('--x', Math.random() * 100 + 'vw');
+            piece.style.setProperty('--delay', Math.random() * .6 + 's');
+            piece.style.setProperty('--color', ['#761c3c','#e88dac','#dcb362'][i % 3]);
+            document.body.appendChild(piece);
+            setTimeout(() => piece.remove(), 3600);
+          }
+        }
+        return {accepted: true, message: 'Então é um encontro!'};
+      }
+      button.disabled = true;
+      button.classList.add('disappearing');
+      if (value === 'clash') message.textContent = 'Só se for comigo';
+      const next = [...document.querySelectorAll('[data-choice]')].find(item => !item.disabled);
+      next?.focus();
+      setTimeout(() => { button.hidden = true; }, 180);
+      return {accepted: false, removed: value, message: message.textContent};
+    }
+    document.querySelectorAll('[data-choice]').forEach(button => {
+      button.addEventListener('click', () => choose(button.dataset.choice));
+    });
+    if (document.modelContext?.registerTool) {
+      try {
+        Promise.resolve(document.modelContext.registerTool({
+          name: 'choose_invitation_option',
+          description: 'Escolhe uma opção do convite na página. Mauricio confirma; as demais desaparecem. Clash também mostra Só se for comigo.',
+          inputSchema: {type:'object',properties:{option:{type:'string',enum:['serie','casa','sanduiche','clash','mauricio']}},required:['option'],additionalProperties:false},
+          annotations:{readOnlyHint:false,untrustedContentHint:false},
+          execute: async input => { const result = choose(input?.option); await new Promise(resolve => setTimeout(resolve, 200)); return result; }
+        })).catch(() => {});
+      } catch (_) {}
+    }
+  </script>
+</body>
+</html>
